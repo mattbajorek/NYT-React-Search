@@ -21,14 +21,14 @@ var Query = React.createClass({
 						  <form>
 						    <div className="form-group">
 						      <h4><strong>Topic</strong></h4>
-						      <input type="text" value={this.props.value} className="form-control" id="search" onChange= {this.props.handleChange} required=""/>
+						      <input type="text" className="form-control" id="search" onChange= {this.props.handleChange} required=""/>
 						      <h4 className=""><strong>Start Year</strong></h4>
-						      <input type="number" value={this.props.value} className="form-control" id="start" onChange= {this.props.handleChange} required=""/>
+						      <input type="number" className="form-control" id="start" onChange= {this.props.handleChange} required=""/>
 						      <h4 className=""><strong>End Year</strong></h4>
-						      <input type="number" value={this.props.value} className="form-control" id="end" onChange= {this.props.handleChange} required=""/>
+						      <input type="number" className="form-control" id="end" onChange= {this.props.handleChange} required=""/>
 						    </div>
 						    <div className="pull-right">
-						      <button type="button" className="btn btn-danger">
+						      <button type="button" className="btn btn-danger" onClick= {this.props.handleClick}>
 						        <h4>Submit</h4>
 						      </button>
 						    </div>

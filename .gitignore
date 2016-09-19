@@ -38,3 +38,6 @@ jspm_packages
 
 # Bundle
 public/bundle.js
+
+# Key
+app/config/key.js
