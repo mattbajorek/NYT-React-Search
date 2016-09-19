@@ -7,10 +7,10 @@ var IndexRoute	= require('react-router').IndexRoute;
 
 // Reference the high-level components
 var Main = require('../components/Main');
-var Child1 = require('../components/Children/Child1'); 
-var Child2 = require('../components/Children/Child2'); 
-var GrandChild1 = require('../components/Children/Grandchildren/GrandChild1');
-var GrandChild2 = require('../components/Children/Grandchildren/GrandChild2');
+var Child1 = require('../components/MainChildren/Child1'); 
+var Child2 = require('../components/MainChildren/Child2'); 
+var GrandChild1 = require('../components/MainChildren/Grandchildren/GrandChild1');
+var GrandChild2 = require('../components/MainChildren/Grandchildren/GrandChild2');
 
 // Export the Routes
 module.exports = (

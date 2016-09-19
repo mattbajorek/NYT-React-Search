@@ -2,9 +2,11 @@
 var React = require('react');
 
 // Include React Components
-var Nav = require('./Children/Nav');
-var Jumbotron = require('./Children/Jumbotron');
-var Query = require('./Children/Query');
+var Nav = require('./MainChildren/Nav');
+var Jumbotron = require('./MainChildren/Jumbotron');
+var Query = require('./MainChildren/Query');
+var Search = require('./MainChildren/Search');
+var Notification = require('./MainChildren/Notification');
 
 // Helper Function
 var helpers = require('./utils/helpers');
@@ -17,7 +19,9 @@ var Main = React.createClass({
 			search: "",
 			start: "",
 			end: "",
-			same: true
+			same: true,
+			results: [],
+			modalIsOpen: false
 		}
 	},
 
@@ -53,20 +57,30 @@ var Main = React.createClass({
 			helpers.runQuery(terms)
 				.then(function(data){
 					console.log(data);
-					// if (data != this.state.results) {
-					// 	console.log("HERE");
-					// 	console.log(data);
 
-					// 	this.setState({
-					// 		results: data
-					// 	})		
-					// }
+					if (data === false) {
+						this.openModal();
+					} else {
+						this.setState({
+							results: data
+						});
+					}					
 
 				// This code is necessary to bind the keyword "this" when we say this.setState 
 				// to actually mean the component itself and not the runQuery function.
 				}.bind(this))		
 		}
 	},
+
+	openModal: function() {
+    this.setState({modalIsOpen: true});
+    var notification = document.getElementById('notification');
+    
+  },
+
+  closeModal: function() {
+    this.setState({modalIsOpen: false});
+  },
 
 	// Here we render the function
 	render: function(){
@@ -77,10 +91,9 @@ var Main = React.createClass({
 
 					<Nav />
 					<Jumbotron />					
-
-				  <div className="main-container">
-				    <Query handleChange={this.handleChange} handleClick={this.handleClick} />
-				  </div>
+				  <Query handleChange={this.handleChange} handleClick={this.handleClick} />
+				  {this.state.results.length !== 0 ? <Search results={this.state.results} /> : null}
+				  <Notification modalIsOpen={this.state.modalIsOpen} openModal={this.openModal} closeModal={this.closeModal} />
 
 					<div className="row">
 						

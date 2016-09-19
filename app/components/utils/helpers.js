@@ -17,12 +17,14 @@ var helpers = {
 				'api-key': NYTAPI,
 		    'q': terms.search,
 		    'begin_date': terms.start + "0101",
-		    'end_date': terms.end + "0101"
+		    'end_date': terms.end + "1231"
 			}
 		})
 			.then(function(res){
-				console.log(res);
 				return res.data.response.docs;
+			})
+			.catch(function(err) {
+				return false;
 			})
 
 	}
