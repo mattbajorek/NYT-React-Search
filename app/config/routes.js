@@ -1,12 +1,9 @@
 // Inclue the React library
 var React = require('react');
 
-// Include the Router
-var Router = require('react-router');
-var Route = Router.Route;
-
-//  Include the IndexRoute (catch-all route)
-var IndexRoute	= Router.IndexRoute;
+// Include the Router and the IndexRoute (catch-all route)
+var Route = require('react-router').Route;
+var IndexRoute	= require('react-router').IndexRoute;
 
 // Reference the high-level components
 var Main = require('../components/Main');
