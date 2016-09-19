@@ -1,6 +1,8 @@
 // Include React 
 var React = require('react');
 var Nav = require('./Children/Nav');
+var Jumbotron = require('./Children/Jumbotron');
+var Query = require('./Children/Query');
 
 var Main = React.createClass({
 
@@ -8,17 +10,15 @@ var Main = React.createClass({
 	render: function(){
 
 		return(
+			<div className="main-container">
 				<div className="container">
+
 					<Nav />
-					<div className="jumbotron">
-						<h2 className="text-center"><strong>(ReactJS) New York Times Article Scrubber</strong></h2>
-						<h3 className="text-center">Search for and save articles of interest.</h3>
-						<hr/>
-						<p>
-							<a href="#/Child1"><button className="btn btn-primary btn-lg">Show Child #1</button></a>
-							<a href="#/Child2"><button className="btn btn-danger btn-lg">Show Child #2</button></a>
-						</p>
-					</div>
+					<Jumbotron />					
+
+				  <div className="main-container">
+				    <Query />
+				  </div>
 
 					<div className="row">
 						
@@ -27,6 +27,7 @@ var Main = React.createClass({
 
 					</div>
 				</div>
+			</div>
 		)
 	}
 });

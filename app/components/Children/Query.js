@@ -1,37 +1,46 @@
 // Include React 
 var React = require('react');
 
-var Nav = React.createClass({
+var Query = React.createClass({
 
 	// Here we render the function
 	render: function(){
 
 		return(
-			<nav className="navbar navbar-default">
-			  <div className="container-fluid">
+			<div className="row">
+				<div className="col-lg-12">
+					<div className="panel panel-primary">
 
-			    <div className="navbar-header">
-			      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			        <span className="sr-only">Toggle navigation</span>
-			        <span className="icon-bar"></span>
-			        <span className="icon-bar"></span>
-			        <span className="icon-bar"></span>
-			      </button>
-			      <a className="navbar-brand" href="#">NYT-React</a>
-			    </div>
+						<div className="panel-heading">
+							<h1 className="panel-title">
+								<strong><i className="fa fa-newspaper-o" aria-hidden="true"></i><span> Query</span></strong>
+							</h1>
+						</div>
 
-			    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			      <ul className="nav navbar-nav navbar-right">
-			        <li><a href="#">Search</a></li>
-			        <li><a href="#">Saved Articles</a></li>
-			      </ul>
-			    </div>
-			    
-			  </div>
-			</nav>
+						<div className="panel-body">
+						  <form>
+						    <div className="form-group">
+						      <h4><strong>Topic</strong></h4>
+						      <input type="text" className="form-control " id="search" required=""/>
+						      <h4 className=""><strong>Start Year</strong></h4>
+						      <input type="number" className="form-control " id="start" required=""/>
+						      <h4 className=""><strong>End Year</strong></h4>
+						      <input type="number" className="form-control " id="end" required=""/>
+						    </div>
+						    <div className="pull-right">
+						      <button type="button" className="btn btn-danger">
+						        <h4>Submit</h4>
+						      </button>
+						    </div>
+						  </form>
+						</div>
+							
+					</div>
+				</div>
+			</div>
 		)
 	}
 });
 
 // Export the component back for use in other files
-module.exports = Nav;
+module.exports = Query;
