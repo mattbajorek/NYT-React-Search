@@ -21,7 +21,9 @@ var Main = React.createClass({
 			end: "",
 			same: true,
 			results: [],
-			modalIsOpen: false
+			modalIsOpen: false,
+			type: "",
+			message: ""
 		}
 	},
 
@@ -48,19 +50,30 @@ var Main = React.createClass({
 
 			// Make object of search parameters
 			var terms = {
-				search: this.state.search,
+				search: this.state.search.trim(),
 				start: this.state.start,
 				end: this.state.end
+			}
+
+			// Check terms to catch user errors
+			if (terms.search === "" || terms.start === "" || terms.end === "") {
+				// Show message if search terms are empty
+				this.message('Error','Please fill in all inputs.');
+				return
+			} else if (terms.start < 1851 || terms.start > 2016 || terms.end < 1951 || terms.end > 2016) {
+				// Show message if out of range
+				this.message('Error','Please specify start and end date between 1851 and 2016.');
+				return
 			}
 
 			// Search for articles
 			helpers.runQuery(terms)
 				.then(function(data){
-					console.log(data);
-
 					if (data === false) {
-						this.openModal();
+						// Show message if no results found
+						this.message('Error','No results found. Please refine inputs.');
 					} else {
+						// Save data to state
 						this.setState({
 							results: data
 						});
@@ -74,12 +87,20 @@ var Main = React.createClass({
 
 	openModal: function() {
     this.setState({modalIsOpen: true});
-    var notification = document.getElementById('notification');
-    
   },
 
   closeModal: function() {
     this.setState({modalIsOpen: false});
+  },
+
+  message: function(type,text) {
+  	// Set text
+  	this.setState({
+  		type: type,
+			message: text
+		});
+		// Show modal
+		this.openModal();
   },
 
 	// Here we render the function
@@ -93,7 +114,12 @@ var Main = React.createClass({
 					<Jumbotron />					
 				  <Query handleChange={this.handleChange} handleClick={this.handleClick} />
 				  {this.state.results.length !== 0 ? <Search results={this.state.results} /> : null}
-				  <Notification modalIsOpen={this.state.modalIsOpen} openModal={this.openModal} closeModal={this.closeModal} />
+				  <Notification
+				  	modalIsOpen={this.state.modalIsOpen}
+				  	openModal={this.openModal}
+				  	closeModal={this.closeModal}
+				  	type={this.state.type}
+				  	message={this.state.message} />
 
 					<div className="row">
 						

@@ -18,7 +18,7 @@ var customStyles = {
 var headerStyles = {
   background: '#2c3e50',
   color: '#fff',
-  padding: '10px'
+  padding: '15px'
 }
 
 var Notification = React.createClass({
@@ -32,12 +32,12 @@ var Notification = React.createClass({
         onRequestClose={this.props.closeModal}
         style={customStyles} >
 
-        <div class="modal-header" style={headerStyles}>
+        <div className="modal-header" style={headerStyles}>
           <button type="button" className="close" onClick={this.props.closeModal} aria-hidden="true">×</button>
-          <h3 className="modal-title"><strong>Error</strong></h3>
+          <h3 className="modal-title"><strong>{this.props.type}</strong></h3>
         </div>
         <div className="modal-footer">
-          <p>No results found. Please refine inputs.</p>
+          <p>{this.props.message}</p>
           <button type="button" className="btn btn-default" onClick={this.props.closeModal}>Close</button>
         </div>
 
