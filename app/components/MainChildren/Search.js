@@ -9,6 +9,8 @@ var Search = React.createClass({
 	// Here we render the function
 	render: function(){
 
+		var saved = this.props.saved;
+
 		return(
 			<div className="row">
 				<div className="col-lg-12">
@@ -16,7 +18,7 @@ var Search = React.createClass({
 
 						<div className="panel-heading">
 							<h1 className="panel-title">
-								<strong><i className="fa fa-newspaper-o" aria-hidden="true"></i><span> Query</span></strong>
+								<strong><i className="fa fa-newspaper-o" aria-hidden="true"></i><span> Results</span></strong>
 							</h1>
 						</div>
 
@@ -24,13 +26,13 @@ var Search = React.createClass({
 						  <ul className="list-group">
 
 						  	{this.props.results.map(function(result) {
-						  		console.log(result)
 						  		return (
 						  			<ListItem 
 						  				key={result._id}
 						  				title={result.headline.main}
 						  				url={result.web_url}
 						  				date={result.pub_date}
+						  				saved={saved}
 						  			/>
 						  		)
 						  	})}

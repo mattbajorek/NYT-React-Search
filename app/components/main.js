@@ -103,6 +103,12 @@ var Main = React.createClass({
 		this.openModal();
   },
 
+  saved: function() {
+  	// Show message if out of range
+		this.message('Saved','Click "Saved Articles" in navigation to review.');
+		return
+  },
+
 	// Here we render the function
 	render: function(){
 
@@ -113,7 +119,7 @@ var Main = React.createClass({
 					<Nav />
 					<Jumbotron />					
 				  <Query handleChange={this.handleChange} handleClick={this.handleClick} />
-				  {this.state.results.length !== 0 ? <Search results={this.state.results} /> : null}
+				  {this.state.results.length !== 0 ? <Search results={this.state.results} saved={this.saved} /> : null}
 				  <Notification
 				  	modalIsOpen={this.state.modalIsOpen}
 				  	openModal={this.openModal}

@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
   
   // This code will be compiled 
@@ -8,13 +10,19 @@ module.exports = {
     filename: "public/bundle.js"
   },
 
+  // Plugins for optimizing
+  plugins: [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  ],
 
   // This will be what we do
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loader: 'babel',
         query: {
           // These are the specific transformations we'll be using. 

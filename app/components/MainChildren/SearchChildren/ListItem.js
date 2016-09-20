@@ -11,7 +11,7 @@ var ListItem = React.createClass({
         <h3>
         	<em>{this.props.title}</em>
         	<div className="btn-group pull-right">
-        		<button className="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
+        		<button className="btn btn-primary" data-toggle="modal" onClick= {this.props.saved}>Save</button>
         		<a className="btn btn-default" href={this.props.url} target="_blank">
         			View Article
         		</a>
