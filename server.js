@@ -50,6 +50,9 @@ app.get('/api/saved', require('./routes/getSaved'));
 // When user hits save
 app.post('/api/saved', require('./routes/postSaved'));
 
+// When user hits delete
+app.delete('/api/saved/:id', require('./routes/deleteSaved'));
+
 // Retrieve next data from the db
 app.get('/next/:id', function(req, res) {
   SavedArticle

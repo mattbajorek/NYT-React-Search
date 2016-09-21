@@ -32,7 +32,9 @@ var helpers = {
 
 	saveArticle: function(article){
 
-		return axios.post(baseURL + '/api/saved', {
+		var queryURL = baseURL + '/api/saved';
+
+		return axios.post(queryURL, {
 			'title': article.title,
 	    'date': article.date,
 	    'url': article.url
@@ -47,7 +49,9 @@ var helpers = {
 
 	getSaved: function(){
 
-		return axios.get(baseURL + '/api/saved')
+		var queryURL = baseURL + '/api/saved';
+
+		return axios.get(queryURL)
 			.then(function(res){
 				if (res.status === 'error') return false;
 				return res.data;
@@ -56,6 +60,20 @@ var helpers = {
 				return false;
 			})
 	},
+
+	deleteSaved: function(id){
+
+		var queryURL = baseURL + '/api/saved/' + id;
+
+		return axios.delete(queryURL)
+			.then(function(res){
+				if (res.status === 'error') return false;
+				return res.data;
+			})
+			.catch(function(err) {
+				return false;
+			})
+	}
 
 }
 

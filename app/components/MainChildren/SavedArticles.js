@@ -36,6 +36,19 @@ var SavedArticles = React.createClass({
 			}.bind(this))	
 	},
 
+	handleClick: function(event){
+    // Send article data to server to save to db
+    helpers.deleteSave({
+      title: this.props.title,
+      date: this.props.date,
+      url: this.props.url
+    }).then(function(res){
+      console.log(res.data.status);
+      // Show message
+      this.props.saved(res.data.status);
+    }.bind(this));
+  },
+
 	// Here we render the function
 	render: function(){
 
@@ -45,6 +58,7 @@ var SavedArticles = React.createClass({
 		  		return (
 		  			<DeleteItem 
 		  				key={result._id}
+		  				id={result._id}
 		  				title={result.title}
 		  				url={result.url}
 		  				date={result.date}

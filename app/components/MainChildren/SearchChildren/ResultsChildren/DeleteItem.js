@@ -6,36 +6,48 @@ var helpers = require('../../../utils/helpers');
 
 var ListItem = React.createClass({
 
+  getInitialState: function(){
+    return {
+      show: true
+    }
+  },
+
   // This function will respond to the user click
   handleClick: function(event){
     // Send article data to server to save to db
-    helpers.saveArticle({
-      title: this.props.title,
-      date: this.props.date,
-      url: this.props.url
-    }).then(function(res){
-      console.log(res.data.status);
-      // Show message
-      this.props.saved(res.data.status);
-    }.bind(this));
+    helpers.deleteSaved(this.props.id)
+      .then(function(res){
+        console.log(res);
+        if (res.status === 'deleted') {
+          // Set render to false
+          this.setState({show: false});
+        }
+        // Show message
+        // this.props.saved(res.data.status);
+      }.bind(this));
   },
 
 	// Here we render the function
 	render: function(){
 
 		return(
-			<li className="list-group-item">
-        <h3>
-        	<em>{this.props.title}</em>
-        	<div className="btn-group pull-right">
-        		<button className="btn btn-primary" data-toggle="modal" onClick={this.handleClick}>Delete</button>
-        		<a className="btn btn-default" href={this.props.url} target="_blank">
-        			View Article
-        		</a>
-        	</div>
-        </h3>
-        <p>Date Published: {this.props.date}</p>
-      </li>
+      <div>
+        {this.state.show === true ?
+          <li className="list-group-item">
+            <h3>
+            	<em>{this.props.title}</em>
+            	<div className="btn-group pull-right">
+            		<button className="btn btn-primary" data-toggle="modal" onClick={this.handleClick}>Delete</button>
+            		<a className="btn btn-default" href={this.props.url} target="_blank">
+            			View Article
+            		</a>
+            	</div>
+            </h3>
+            <p>Date Published: {this.props.date}</p>
+          </li>
+         : null}
+      </div>
+      
 		)
 	}
 });

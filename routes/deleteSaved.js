@@ -2,15 +2,20 @@
 var SavedArticle = require('../models/savedArticleModel');
 
 module.exports = function(req, res) {
+
+  console.log("------------------------------")
+  console.log("RECEIVED DELETE!")
+  console.log(req.params.id)
+
+  // Remove saved article
   SavedArticle
-    .find()
+    .remove({_id: req.params.id})
     .exec(function(err,data) {
       if (err) {
-      // console.log(err);
+      console.log(err);
       res.json({status: 'error'})
     } else {
-      // console.log(data);
-      res.json(data)
+      res.json({status: 'deleted'})
     }
   })
 }

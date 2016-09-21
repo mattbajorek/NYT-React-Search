@@ -113,7 +113,7 @@ var Search = React.createClass({
 	// Here we render the function
 	render: function(){
 
-		var saved = this.props.saved;
+		var saved = this.saved;
 
 		return(
 			<div>			
