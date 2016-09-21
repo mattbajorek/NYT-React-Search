@@ -4,6 +4,7 @@ var React = require('react');
 // Include React Components
 var Query = require('./SearchChildren/Query');
 var Results = require('./SearchChildren/Results');
+var SaveItem = require('./SearchChildren/ResultsChildren/SaveItem');
 var Notification = require('./SearchChildren/Notification');
 
 // Helper Function
@@ -112,11 +113,26 @@ var Search = React.createClass({
 	// Here we render the function
 	render: function(){
 
+		var saved = this.props.saved;
+
 		return(
 			<div>			
 
 			  <Query handleChange={this.handleChange} handleClick={this.handleClick} />
-			  {this.state.results.length !== 0 ? <Results results={this.state.results} saved={this.saved} /> : null}
+			  {this.state.results.length !== 0 ? 
+			  	<Results fa="fa fa-newspaper-o" text="Results">
+			  		{this.state.results.map(function(result) {
+				  		return (
+				  			<SaveItem 
+				  				key={result._id}
+				  				title={result.headline.main}
+				  				url={result.web_url}
+				  				date={result.pub_date}
+				  				saved={saved}
+				  			/>
+				  		)
+				  	})}
+				  </Results> : null}
 			  <Notification
 			  	modalIsOpen={this.state.modalIsOpen}
 			  	openModal={this.openModal}

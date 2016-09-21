@@ -43,7 +43,19 @@ var helpers = {
 			.catch(function(err) {
 				return false;
 			})
-	}
+	},
+
+	getSaved: function(){
+
+		return axios.get(baseURL + '/api/saved')
+			.then(function(res){
+				if (res.status === 'error') return false;
+				return res.data;
+			})
+			.catch(function(err) {
+				return false;
+			})
+	},
 
 }
 

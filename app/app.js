@@ -11,7 +11,7 @@ var IndexRoute	= require('react-router').IndexRoute;
 // Reference the high-level components
 var Main = require('./components/Main');
 var Search = require('./components/MainChildren/Search'); 
-var Saved = require('./components/MainChildren/Child1');
+var Saved = require('./components/MainChildren/SavedArticles');
 
 // Renders the contents according to the route page. 
 ReactDOM.render(

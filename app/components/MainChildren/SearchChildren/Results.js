@@ -2,14 +2,14 @@
 var React = require('react');
 
 // Include React Components
-var ListItem = require('./ResultsChildren/ListItem');
+var SaveItem = require('./ResultsChildren/SaveItem');
 
 var Results = React.createClass({
 
 	// Here we render the function
 	render: function(){
 
-		var saved = this.props.saved;
+		
 
 		return(
 			<div className="row">
@@ -18,24 +18,14 @@ var Results = React.createClass({
 
 						<div className="panel-heading">
 							<h1 className="panel-title">
-								<strong><i className="fa fa-newspaper-o" aria-hidden="true"></i><span> Results</span></strong>
+								<strong><i className={this.props.fa} aria-hidden="true"></i><span> {this.props.text}</span></strong>
 							</h1>
 						</div>
 
 						<div className="panel-body">
 						  <ul className="list-group">
 
-						  	{this.props.results.map(function(result) {
-						  		return (
-						  			<ListItem 
-						  				key={result._id}
-						  				title={result.headline.main}
-						  				url={result.web_url}
-						  				date={result.pub_date}
-						  				saved={saved}
-						  			/>
-						  		)
-						  	})}
+						  	{this.props.children}
 
 					    </ul>
 						</div>
