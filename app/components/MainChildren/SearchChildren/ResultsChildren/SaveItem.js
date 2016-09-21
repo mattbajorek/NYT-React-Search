@@ -14,9 +14,9 @@ var ListItem = React.createClass({
       date: this.props.date,
       url: this.props.url
     }).then(function(res){
-      console.log(res.data.status);
+      // console.log(res.status);
       // Show message
-      this.props.saved(res.data.status);
+      this.props.saved(res.status);
     }.bind(this));
   },
 

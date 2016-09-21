@@ -40,7 +40,7 @@ var helpers = {
 	    'url': article.url
 		})
 			.then(function(res){
-				return res;
+				return res.data;
 			})
 			.catch(function(err) {
 				return false;

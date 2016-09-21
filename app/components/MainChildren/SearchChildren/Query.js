@@ -29,7 +29,7 @@ var Query = React.createClass({
 						    </div>
 						    <div className="pull-right">
 						      <button type="button" className="btn btn-danger" onClick= {this.props.handleClick}>
-						        <h4>Submit</h4>
+						        <h4>Search</h4>
 						      </button>
 						    </div>
 						  </form>

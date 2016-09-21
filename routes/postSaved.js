@@ -12,10 +12,10 @@ module.exports = function(req, res) {
   // Save data
   savedArticle.save(function(err) {
     if (err) {
-      console.log(err);
+      // console.log(err);
       res.json({status: 'error'})
     } else {
-      console.log('Saved');
+      // console.log('Saved');
       res.json({status: 'saved'})
     }
   });

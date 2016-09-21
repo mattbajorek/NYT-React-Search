@@ -17,13 +17,14 @@ var ListItem = React.createClass({
     // Send article data to server to save to db
     helpers.deleteSaved(this.props.id)
       .then(function(res){
-        console.log(res);
+        // console.log(res);
         if (res.status === 'deleted') {
           // Set render to false
           this.setState({show: false});
-        }
-        // Show message
-        // this.props.saved(res.data.status);
+        } else {
+          // Show message
+          this.props.deleted('error');
+        }        
       }.bind(this));
   },
 
