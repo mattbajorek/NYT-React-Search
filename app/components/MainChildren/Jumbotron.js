@@ -10,11 +10,6 @@ var Jumbotron = React.createClass({
 			<div className="jumbotron">
 				<h2 className="text-center"><strong>(ReactJS) New York Times Article Scrubber</strong></h2>
 				<h3 className="text-center">Search for and save articles of interest.</h3>
-				<hr/>
-				<p>
-					<a href="#/Child1"><button className="btn btn-primary btn-lg">Show Child #1</button></a>
-					<a href="#/Child2"><button className="btn btn-danger btn-lg">Show Child #2</button></a>
-				</p>
 			</div>
 		)
 	}

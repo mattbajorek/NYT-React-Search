@@ -48,23 +48,7 @@ app.get('/', function(req, res) {
 app.get('/api/saved', require('./routes/getSaved'));
 
 // When user hits save
-app.post('/api/saved', function(req, res) {
-  // Create mongoose model
-  var savedArticle = new SavedArticle({
-    title: title,
-    imgURL: imgURL,
-    synopsis: synopsis,
-    articleURL: articleURL
-  });
-  // Save data
-  savedArticle.save(function(err) {
-    if (err) {
-      console.log(err);
-    }
-    console.log('Saved');
-  });
-  
-});
+app.post('/api/saved', require('./routes/postSaved'));
 
 // Retrieve next data from the db
 app.get('/next/:id', function(req, res) {

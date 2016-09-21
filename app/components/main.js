@@ -4,110 +4,11 @@ var React = require('react');
 // Include React Components
 var Nav = require('./MainChildren/Nav');
 var Jumbotron = require('./MainChildren/Jumbotron');
-var Query = require('./MainChildren/Query');
-var Search = require('./MainChildren/Search');
-var Notification = require('./MainChildren/Notification');
 
 // Helper Function
 var helpers = require('./utils/helpers');
 
 var Main = React.createClass({
-
-	// Here we set a generic state associated with the text being searched for
-	getInitialState: function(){
-		return {
-			search: "",
-			start: "",
-			end: "",
-			same: true,
-			results: [],
-			modalIsOpen: false,
-			type: "",
-			message: ""
-		}
-	},
-
-	// This function will respond to the user input 
-	handleChange: function(event){
-
-  	// Here we create syntax to capture any change in text to the query terms (pre-search).
-  	// See this Stack Overflow answer for more details: 
-  	// http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
-  	var newState = {};
-  	newState[event.target.id] = event.target.value;
-  	// Allows the submit button to send a request again because state has changed
-  	newState['same'] = false;
-  	this.setState(newState);
-
-	},
-
-	// This function will respond to the user click
-	handleClick: function(event){
-
-		if (this.state.same === false) {
-			// Stop submit button from sending a request again until state has changed
-			this.setState({same: true});
-
-			// Make object of search parameters
-			var terms = {
-				search: this.state.search.trim(),
-				start: this.state.start,
-				end: this.state.end
-			}
-
-			// Check terms to catch user errors
-			if (terms.search === "" || terms.start === "" || terms.end === "") {
-				// Show message if search terms are empty
-				this.message('Error','Please fill in all inputs.');
-				return
-			} else if (terms.start < 1851 || terms.start > 2016 || terms.end < 1951 || terms.end > 2016) {
-				// Show message if out of range
-				this.message('Error','Please specify start and end date between 1851 and 2016.');
-				return
-			}
-
-			// Search for articles
-			helpers.runQuery(terms)
-				.then(function(data){
-					if (data === false) {
-						// Show message if no results found
-						this.message('Error','No results found. Please refine inputs.');
-					} else {
-						// Save data to state
-						this.setState({
-							results: data
-						});
-					}					
-
-				// This code is necessary to bind the keyword "this" when we say this.setState 
-				// to actually mean the component itself and not the runQuery function.
-				}.bind(this))		
-		}
-	},
-
-	openModal: function() {
-    this.setState({modalIsOpen: true});
-  },
-
-  closeModal: function() {
-    this.setState({modalIsOpen: false});
-  },
-
-  message: function(type,text) {
-  	// Set text
-  	this.setState({
-  		type: type,
-			message: text
-		});
-		// Show modal
-		this.openModal();
-  },
-
-  saved: function() {
-  	// Show message if out of range
-		this.message('Saved','Click "Saved Articles" in navigation to review.');
-		return
-  },
 
 	// Here we render the function
 	render: function(){
@@ -117,22 +18,11 @@ var Main = React.createClass({
 				<div className="container">
 
 					<Nav />
-					<Jumbotron />					
-				  <Query handleChange={this.handleChange} handleClick={this.handleClick} />
-				  {this.state.results.length !== 0 ? <Search results={this.state.results} saved={this.saved} /> : null}
-				  <Notification
-				  	modalIsOpen={this.state.modalIsOpen}
-				  	openModal={this.openModal}
-				  	closeModal={this.closeModal}
-				  	type={this.state.type}
-				  	message={this.state.message} />
-
-					<div className="row">
+					<Jumbotron />
 						
-						{/*This code will dump the correct Child Component*/}
-						{this.props.children}
+					{/*This code will dump the correct Child Component*/}
+					{this.props.children}
 
-					</div>
 				</div>
 			</div>
 		)

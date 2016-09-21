@@ -2,22 +2,24 @@
 var axios = require('axios');
 
 // NYT API
-var path = require('path');
 var NYTAPI = require('../../config/key.js');
+
+// Current base URL
+var baseURL = window.location.origin;
 
 // Helper Functions (in this case the only one is runQuery)
 var helpers = {
 
-	runQuery: function(terms){
+	getArticles: function(terms){
 
 		var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
 
 		return axios.get(queryURL, {
 			params: {
-				'api-key': NYTAPI,
-		    'q': terms.search,
-		    'begin_date': terms.start + "0101",
-		    'end_date': terms.end + "1231"
+			'api-key': NYTAPI,
+	    'q': terms.search,
+	    'begin_date': terms.start + "0101",
+	    'end_date': terms.end + "1231"
 			}
 		})
 			.then(function(res){
@@ -26,10 +28,23 @@ var helpers = {
 			.catch(function(err) {
 				return false;
 			})
+	},
 
+	saveArticle: function(article){
+
+		return axios.post(baseURL + '/api/saved', {
+			'title': article.title,
+	    'date': article.date,
+	    'url': article.url
+		})
+			.then(function(res){
+				return res;
+			})
+			.catch(function(err) {
+				return false;
+			})
 	}
 
 }
 
-// We export the helpers function (which contains getGithubInfo)
 module.exports = helpers;
